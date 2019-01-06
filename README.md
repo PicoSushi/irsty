@@ -1,0 +1,2 @@
+# irsty
+cli for irasutoya.
