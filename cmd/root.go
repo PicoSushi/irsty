@@ -17,6 +17,7 @@ var rootCmd = &cobra.Command{
 	Short: "irsty is a CLI tool for irasutoya.",
 	Long: `irsty is a CLI tool for https://www.irasutoya.com .
 This tool offers searching, fetching info, and other commands for irasutoya.`,
+	Version: "v0.0.0",
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
