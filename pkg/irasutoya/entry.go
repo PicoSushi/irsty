@@ -1,13 +1,13 @@
 package irasutoya
 
 import (
-	"fmt"
+	_ "fmt"
 	"net/http"
-	"time"
-	"strconv"
-	"strings"
+	_ "time"
+	_ "strconv"
+	_ "strings"
 
-	"github.com/PuerkitoBio/goquery"
+	_ "github.com/PuerkitoBio/goquery"
 )
 
 // Entry is a page from irasutoya.com.
@@ -48,5 +48,7 @@ func (entry *Entry)FetchIrastoes() ([]Irasuto, error) {
 	if err != nil {
 		return entry.Irasutoes, err
 	}
+	defer res.Body.Close()
+	// WIP
 	return entry.Irasutoes, err
 }
