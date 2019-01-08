@@ -5,6 +5,9 @@ import (
 	_ "net/http"
 )
 
+// SearchResult is result of search.
+// Search returns multiple SearchResult.
+// Result will corresponds Entry one-to-one.
 type SearchResult struct {
 	URL          string `json:"url"`
 	ThumbnailURL string `json:"thumbnail_url"`
