@@ -15,7 +15,7 @@ type SearchResult struct {
 }
 
 // Search searches irasuto from irasutoya with given query, and returns []SearchResult.
-func Search(quuery string) ([]SearchResult, error) {
+func Search(query string) ([]SearchResult, error) {
 	var searchResults = []SearchResult{}
 	return searchResults, nil
 }
