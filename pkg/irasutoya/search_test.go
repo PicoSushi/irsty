@@ -15,7 +15,7 @@ func TestSearch(t *testing.T) {
 			ok = true
 		}
 	}
-	if ! ok {
+	if !ok {
 		t.Fatalf("Couldn't find イクラのお寿司のイラスト.")
 	}
 }

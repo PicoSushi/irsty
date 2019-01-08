@@ -6,9 +6,9 @@ import (
 )
 
 type SearchResult struct {
-	URL string `json:"url"`
+	URL          string `json:"url"`
 	ThumbnailURL string `json:"thumbnail_url"`
-	Description string `json:"description"`
+	Description  string `json:"description"`
 }
 
 // Search searches irasuto from irasutoya with given query, and returns []SearchResult.

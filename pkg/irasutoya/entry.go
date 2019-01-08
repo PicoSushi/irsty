@@ -3,9 +3,9 @@ package irasutoya
 import (
 	_ "fmt"
 	"net/http"
-	_ "time"
 	_ "strconv"
 	_ "strings"
+	_ "time"
 
 	_ "github.com/PuerkitoBio/goquery"
 )
@@ -35,7 +35,7 @@ func (entry *Entry) UpdateIrastoes() error {
 //
 // NOTE: This method does not change Entry itself.
 // If you want to update, call Entry.UpdateIrastoes instead.
-func (entry *Entry)FetchIrastoes() ([]Irasuto, error) {
+func (entry *Entry) FetchIrastoes() ([]Irasuto, error) {
 	var err error
 
 	url := entry.URL

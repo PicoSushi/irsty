@@ -3,8 +3,8 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/spf13/cobra"
 	"github.com/PicoSushi/irsty/pkg/irasutoya"
+	"github.com/spf13/cobra"
 )
 
 // searchCmd represents the search command
