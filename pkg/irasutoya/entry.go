@@ -15,7 +15,7 @@ import (
 type Entry struct {
 	URL string `json:"url"`
 
-	IsSpecial bool `json:"is_special`
+	IsSpecial bool `json:"is_special"`
 
 	Irasutoes []Irasuto `json:"-"`
 }
