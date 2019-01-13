@@ -19,8 +19,6 @@ type SearchResult struct {
 
 // Search searches irasuto from irasutoya with given query, and returns []SearchResult.
 func Search(query string) ([]SearchResult, error) {
-	var searchResults = []SearchResult{}
-
 	searchURL := fmt.Sprintf("https://www.irasutoya.com/search?q=%s", query)
 	searchResults, nextURL, err := fetchSearchResult(searchURL)
 
@@ -29,12 +27,12 @@ func Search(query string) ([]SearchResult, error) {
 	}
 
 	for nextURL != "" {
-		var srs = []SearchResult{}
-		srs, nextURL, err = fetchSearchResult(nextURL)
+		srs, n, err := fetchSearchResult(nextURL)
 		searchResults = append(searchResults, srs...)
 		if err != nil {
 			return searchResults, err
 		}
+		nextURL = n
 	}
 
 	return searchResults, err
