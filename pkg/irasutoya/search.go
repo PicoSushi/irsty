@@ -58,12 +58,14 @@ func fetchSearchResult(url string) (srs []SearchResult, nextURL string, err erro
 
 	posts.Each(func(i int, s *goquery.Selection) {
 		sr := SearchResult{}
-		script := s.Find("div.boxim > a > script").Text()
-		t := strings.Split(script, "\"")
-		sr.ThumbnailURL, sr.Description = t[1], t[3]
-
 		desc := s.Find("div.boxmeta.clearfix > h2 > a")
 		sr.EntryURL, _ = desc.Attr("href")
+		sr.Description = desc.Text()
+
+		script := s.Find("div.boxim > a > script").Text()
+		t := strings.Split(script, "\"")
+		sr.ThumbnailURL = t[1]
+
 		srs = append(srs, sr)
 	})
 	nextURL, _ = doc.Find("#Blog1_blog-pager-older-link").Attr("href")
