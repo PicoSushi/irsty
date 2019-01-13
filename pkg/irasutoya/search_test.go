@@ -65,11 +65,10 @@ func TestManyResultsSerach(t *testing.T) {
 	}
 }
 
-
 func TestFetchEntry(t *testing.T) {
 	// イクラのお寿司
 	ikuraURL := "https://www.irasutoya.com/2013/04/blog-post_8611.html"
-	sr := SearchResult{EntryURL: ikuraURL,}
+	sr := SearchResult{EntryURL: ikuraURL}
 	entry := sr.FetchEntry()
 
 	if entry.URL != ikuraURL {
@@ -85,7 +84,7 @@ func TestFetchEntry(t *testing.T) {
 	}
 
 	ikuraIrasuto := entry.Irasutoes[0]
-	if ikuraIrasuto.Title !="イクラのお寿司のイラスト" {
+	if ikuraIrasuto.Title != "イクラのお寿司のイラスト" {
 		t.Fatalf("Irasuto title seems odd: %s", ikuraIrasuto.Title)
 	}
 
