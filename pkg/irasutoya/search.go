@@ -70,3 +70,9 @@ func fetchSearchResult(url string) (srs []SearchResult, nextURL string, err erro
 
 	return srs, nextURL, nil
 }
+
+// FetchEntry fetches an Entry corresponds to SearchResult.
+func (self *SearchResult) FetchEntry() Entry {
+	fmt.Println(self.EntryURL)
+	return Entry{}
+}
