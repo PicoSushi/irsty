@@ -15,7 +15,9 @@ import (
 type Entry struct {
 	URL string `json:"url"`
 
-	IsSpecial bool `json:"is_special"`
+	Title       string `json:"title"`
+	Description string `json:"description"`
+	IsSpecial   bool   `json:"is_special"` // ex: PR page
 
 	Irasutoes []Irasuto `json:"-"`
 }
