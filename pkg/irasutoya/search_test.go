@@ -64,3 +64,32 @@ func TestManyResultsSerach(t *testing.T) {
 		t.Fatalf("Searching \"忍者\"'s result too less: %d.", len(srs))
 	}
 }
+
+
+func TestFetchEntry(t *testing.T) {
+	// イクラのお寿司
+	ikuraURL := "https://www.irasutoya.com/2013/04/blog-post_8611.html"
+	sr := SearchResult{EntryURL: ikuraURL,}
+	entry := sr.FetchEntry()
+
+	if entry.URL != ikuraURL {
+		t.Fatalf("URL changed: \"%s\", expected: \"%s\"", entry.URL, ikuraURL)
+	}
+
+	if entry.Title != "イクラのお寿司のイラスト" {
+		t.Fatalf("Title seems odd: %s", entry.Title)
+	}
+
+	if len(entry.Irasutoes) != 1 {
+		t.Fatalf("Number of Ikura is odd: %d, want: 1", len(entry.Irasutoes))
+	}
+
+	ikuraIrasuto := entry.Irasutoes[0]
+	if ikuraIrasuto.Title !="イクラのお寿司のイラスト" {
+		t.Fatalf("Irasuto title seems odd: %s", ikuraIrasuto.Title)
+	}
+
+	if ikuraIrasuto.ImageURL != "" {
+		t.Fatalf("Irasuto.ImageURL not set.")
+	}
+}
