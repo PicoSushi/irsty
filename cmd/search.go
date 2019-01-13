@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+	"encoding/json"
 
 	"github.com/PicoSushi/irsty/pkg/irasutoya"
 	"github.com/spf13/cobra"
@@ -26,5 +27,16 @@ func init() {
 }
 
 func search(cmd *cobra.Command, args []string) {
-	fmt.Println("search called")
+	query := args[0]
+	results, err := irasutoya.Search(query)
+	if err != nil {
+		panic(err)
+	}
+	i, err := json.Marshal(results)
+	if err != nil {
+		panic(err)
+	}
+
+
+	fmt.Println(string(i))
 }
