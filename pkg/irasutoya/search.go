@@ -1,15 +1,18 @@
 package irasutoya
 
 import (
-	_ "fmt"
-	_ "net/http"
+	"fmt"
+	"net/http"
+	"strings"
+
+	"github.com/PuerkitoBio/goquery"
 )
 
 // SearchResult is result of search.
 // Search returns multiple SearchResult.
 // Result will corresponds Entry one-to-one.
 type SearchResult struct {
-	URL          string `json:"url"`
+	EntryURL     string `json:"entry_url"`
 	ThumbnailURL string `json:"thumbnail_url"`
 	Description  string `json:"description"`
 }
@@ -17,10 +20,53 @@ type SearchResult struct {
 // Search searches irasuto from irasutoya with given query, and returns []SearchResult.
 func Search(query string) ([]SearchResult, error) {
 	var searchResults = []SearchResult{}
-	return searchResults, nil
+
+	searchURL := fmt.Sprintf("https://www.irasutoya.com/search?q=%s", query)
+	searchResults, nextURL, err := fetchSearchResult(searchURL)
+
+	if err != nil {
+		return searchResults, err
+	}
+
+	for nextURL != "" {
+		var srs = []SearchResult{}
+		srs, nextURL, err = fetchSearchResult(nextURL)
+		searchResults = append(searchResults, srs...)
+		if err != nil {
+			return searchResults, err
+		}
+	}
+
+	return searchResults, err
 }
 
 // fetchSearchResult fetches and parses URL.
-func fetchSearchResult(url string) (sres []SearchResult, hasNext bool, err error) {
-	return sres, false, nil
+func fetchSearchResult(url string) (srs []SearchResult, nextURL string, err error) {
+	res, err := http.Get(url)
+	if err != nil {
+		return srs, "", err
+	}
+	defer res.Body.Close()
+
+	// Load the HTML document
+	doc, err := goquery.NewDocumentFromReader(res.Body)
+	if err != nil {
+		return srs, "", err
+	}
+
+	posts := doc.Find("#post") // wow, irasutoya has multiple ids!
+
+	posts.Each(func(i int, s *goquery.Selection) {
+		sr := SearchResult{}
+		script := s.Find("div.boxim > a > script").Text()
+		t := strings.Split(script, "\"")
+		sr.ThumbnailURL, sr.Description = t[1], t[3]
+
+		desc := s.Find("div.boxmeta.clearfix > h2 > a")
+		sr.EntryURL, _ = desc.Attr("href")
+		srs = append(srs, sr)
+	})
+	nextURL, _ = doc.Find("#Blog1_blog-pager-older-link").Attr("href")
+
+	return srs, nextURL, nil
 }
