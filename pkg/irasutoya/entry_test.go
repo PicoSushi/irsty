@@ -33,6 +33,13 @@ func TestNewEntry(t *testing.T) {
 		)
 	}
 
+	exCats := []string{"お寿司"}
+	if entry.Categories != exCats {
+		t.Fatal("Entry.Categories seems odd:", entry.Categories,
+			", expected:", exCats,
+		)
+	}
+
 	if entry.IsSpecial {
 		t.Fatal("This entry is set as Special, in spite of it's not special.")
 	}
@@ -98,6 +105,9 @@ func TestNewSpecialEntry(t *testing.T) {
 			", expected:", exTitle,
 		)
 	}
+	t.Log(
+		"Special description is set as:", entry.Description,
+	)
 	if !entry.IsSpecial {
 		t.Fatal("This entry is not set as Special, in spite of it's special.")
 	}

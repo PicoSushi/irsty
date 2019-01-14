@@ -20,6 +20,7 @@ type Entry struct {
 	IsSpecial   bool      `json:"is_special"` // ex: PR page
 	PublishDate time.Time `json:"publish_date"`
 
+	Categories []string `json:"categories"`
 	Irasutoes []Irasuto `json:"irasutoes"`
 }
 
