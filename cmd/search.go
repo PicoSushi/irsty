@@ -1,8 +1,8 @@
 package cmd
 
 import (
-	"fmt"
 	"encoding/json"
+	"fmt"
 
 	"github.com/PicoSushi/irsty/pkg/irasutoya"
 	"github.com/spf13/cobra"
@@ -36,7 +36,6 @@ func search(cmd *cobra.Command, args []string) {
 	if err != nil {
 		panic(err)
 	}
-
 
 	fmt.Println(string(i))
 }
