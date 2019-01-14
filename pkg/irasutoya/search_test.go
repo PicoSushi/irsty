@@ -69,7 +69,10 @@ func TestFetchEntry(t *testing.T) {
 	// イクラのお寿司
 	ikuraURL := "https://www.irasutoya.com/2013/04/blog-post_8611.html"
 	sr := SearchResult{EntryURL: ikuraURL}
-	entry := sr.FetchEntry()
+	entry, err := sr.FetchEntry()
+	if err != nil {
+		t.Fatal(err)
+	}
 
 	if entry.URL != ikuraURL {
 		t.Fatalf("URL changed: \"%s\", expected: \"%s\"", entry.URL, ikuraURL)
