@@ -3,7 +3,6 @@ package irasutoya
 import (
 	"fmt"
 	"net/http"
-	_ "strconv"
 	"strings"
 	"time"
 
@@ -39,7 +38,7 @@ func (entry *Entry) Load() error {
 	var err error
 	url := entry.URL
 	if entry.URL == "" {
-		return fmt.Errorf("entry.url not set.")
+		return fmt.Errorf("entry.url not set")
 	}
 
 	// trim trailing slash
@@ -65,6 +64,10 @@ func (entry *Entry) Load() error {
 	pubDate := doc.Find("#post > div:nth-child(3) > div.entry-post-date > span").Text()
 	loc, _ := time.LoadLocation("Asia/Tokyo")
 	entry.PublishDate, err = time.ParseInLocation("公開日：2006/01/02", pubDate, loc)
+	if err != nil {
+		return err
+	}
+
 
 	doc.Find("#post > div > span.category > a").Each(func(i int, s *goquery.Selection) {
 		entry.Categories = append(entry.Categories, s.Text())
