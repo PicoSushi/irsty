@@ -36,7 +36,7 @@ func TestNewEntry(t *testing.T) {
 	if entry.IsSpecial {
 		t.Fatal("This entry is set as Special, in spite of it's not special.")
 	}
-	year, month, day :=  entry.PublishDate.Date()
+	year, month, day := entry.PublishDate.Date()
 	if year != 2013 || month != time.April || day != 9 {
 		t.Fatalf(
 			"Entry.PublishDate seems odd: %d/%d/%d, expected: 2013/4/9",
@@ -76,7 +76,7 @@ func TestNewEntryWithMultipleIrastoes(t *testing.T) {
 	if entry.IsSpecial {
 		t.Fatal("This entry is set as Special, in spite of it's not special.")
 	}
-	year, month, day :=  entry.PublishDate.Date()
+	year, month, day := entry.PublishDate.Date()
 	if year != 2018 || month != time.March || day != 5 {
 		t.Fatalf(
 			"Entry.PublishDate seems odd: %d/%d/%d, expected: 2018/3/5",
@@ -101,7 +101,7 @@ func TestNewSpecialEntry(t *testing.T) {
 	if !entry.IsSpecial {
 		t.Fatal("This entry is not set as Special, in spite of it's special.")
 	}
-	year, month, day :=  entry.PublishDate.Date()
+	year, month, day := entry.PublishDate.Date()
 	if year != 2016 || month != time.June || day != 18 {
 		t.Fatalf(
 			"Entry.PublishDate seems odd: %d/%d/%d, expected: 2016/6/18",
