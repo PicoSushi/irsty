@@ -91,7 +91,7 @@ func TestFetchEntry(t *testing.T) {
 		t.Fatalf("Irasuto title seems odd: %s", ikuraIrasuto.Title)
 	}
 
-	if ikuraIrasuto.ImageURL != "" {
+	if ikuraIrasuto.ImageURL == "" {
 		t.Fatalf("Irasuto.ImageURL not set.")
 	}
 }
