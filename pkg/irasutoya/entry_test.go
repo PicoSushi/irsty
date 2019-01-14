@@ -120,6 +120,7 @@ func TestNewSpecialEntry(t *testing.T) {
 			", expected:", exCats,
 		)
 	}
+	t.Log(entry.Irasutoes)
 	if !entry.IsSpecial {
 		t.Fatal("This entry is not set as Special, in spite of it's special.")
 	}

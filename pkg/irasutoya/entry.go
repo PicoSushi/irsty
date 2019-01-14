@@ -69,8 +69,19 @@ func (entry *Entry) Load() error {
 	doc.Find("#post > div > span.category > a").Each(func(i int, s *goquery.Selection) {
 		entry.Categories = append(entry.Categories, s.Text())
 	})
-	if err != nil {
-		return err
-	}
+
+	doc.Find("#post > div.entry > div > a > img").Each(func(i int, s *goquery.Selection) {
+		ok := true
+		irasuto := Irasuto{}
+		irasuto.ImageURL, _ = s.Attr("src")
+		irasuto.ImageURL = "https:" + irasuto.ImageURL
+		irasuto.Title, ok = s.Attr("alt")
+
+		if ok {
+			entry.Irasutoes = append(entry.Irasutoes, irasuto)
+		} else {
+			entry.IsSpecial = true
+		}
+	})
 	return nil
 }
