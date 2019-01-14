@@ -20,8 +20,8 @@ type Entry struct {
 	IsSpecial   bool      `json:"is_special"` // ex: PR page
 	PublishDate time.Time `json:"publish_date"`
 
-	Categories []string `json:"categories"`
-	Irasutoes []Irasuto `json:"irasutoes"`
+	Categories []string  `json:"categories"`
+	Irasutoes  []Irasuto `json:"irasutoes"`
 }
 
 // NewEntry is a constructor for Entry.
@@ -65,6 +65,10 @@ func (entry *Entry) Load() error {
 	pubDate := doc.Find("#post > div:nth-child(3) > div.entry-post-date > span").Text()
 	loc, _ := time.LoadLocation("Asia/Tokyo")
 	entry.PublishDate, err = time.ParseInLocation("公開日：2006/01/02", pubDate, loc)
+
+	doc.Find("#post > div > span.category > a").Each(func(i int, s *goquery.Selection) {
+		entry.Categories = append(entry.Categories, s.Text())
+	})
 	if err != nil {
 		return err
 	}
