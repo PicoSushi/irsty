@@ -50,6 +50,10 @@ func isearch(cmd *cobra.Command, args []string) {
 	}
 
 	entry, err := irasutoya.NewEntry(titleResult[choosed].EntryURL)
+	if err != nil {
+		panic(err)
+	}
+
 	if entry.IsSpecial {
 		panic(fmt.Errorf("Sorry, it's special page and there're no irasutoes."))
 	}
