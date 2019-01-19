@@ -11,19 +11,15 @@ import (
 // searchCmd represents the search command
 var searchCmd = &cobra.Command{
 	Use:   "search",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
+	Short: "Search from irasutoya",
+	Long: `Search from irasutoya.
 
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+This command returns result as JSON.`,
 	Run: search,
 }
 
 func init() {
 	rootCmd.AddCommand(searchCmd)
-	// searchCmd.PersistentFlags().Bool("all", false, "If specifyied, search returns all pages.")
 }
 
 func search(cmd *cobra.Command, args []string) {

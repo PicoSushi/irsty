@@ -68,7 +68,6 @@ func (entry *Entry) Load() error {
 		return err
 	}
 
-
 	doc.Find("#post > div > span.category > a").Each(func(i int, s *goquery.Selection) {
 		entry.Categories = append(entry.Categories, s.Text())
 	})
