@@ -73,7 +73,7 @@ func (entry *Entry) Load() error {
 	})
 
 	doc.Find("#post > div.entry > div > a > img").Each(func(i int, s *goquery.Selection) {
-		ok := true
+		var ok bool
 		irasuto := Irasuto{}
 		irasuto.ImageURL, _ = s.Attr("src")
 		irasuto.ImageURL = "https:" + irasuto.ImageURL
