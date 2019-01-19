@@ -1,11 +1,18 @@
+---
 builds:
-- env:
-  - CGO_ENABLED=0
+  - env:
+      - CGO_ENABLED=0
+    goos:
+      - windows
+      - darwin
+      - linux
+      - freebsd
 archive:
   replacements:
-    darwin: Darwin
-    linux: Linux
     windows: Windows
+    linux: Linux
+    freemsd: FreeBSD
+    darwin: Darwin
     386: i386
     amd64: x86_64
 checksum:
@@ -16,5 +23,5 @@ changelog:
   sort: asc
   filters:
     exclude:
-    - '^docs:'
-    - '^test:'
+      - '^docs:'
+      - '^test:'
